@@ -19,5 +19,25 @@ package com.rohitss.news.homeMVP
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsHomePresenterImpl {
+class NewsHomePresenterImpl(val newsHomeView: NewsHomeView, val newsHomeInteracterImpl: NewsHomeInteracterImpl) : NewsHomePresenter, NewsHomeInteracter.OnFinishedListener {
+    override fun getNewsUpdates() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onDestroy() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onNoNetworkError() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onRequestFetchError() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onRequestSuccess() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }

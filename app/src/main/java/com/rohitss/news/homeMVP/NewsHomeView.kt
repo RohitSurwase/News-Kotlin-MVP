@@ -20,4 +20,9 @@ package com.rohitss.news.homeMVP
  * Created by RohitSS on 27-12-2017.
  */
 interface NewsHomeView {
+    fun showProgress()
+    fun hideProgress()
+    fun noNetworkError()
+    fun requestSuccess()
+    fun requestFailed()
 }

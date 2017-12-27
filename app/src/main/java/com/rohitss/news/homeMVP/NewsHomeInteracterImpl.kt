@@ -19,5 +19,9 @@ package com.rohitss.news.homeMVP
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsHomeInteracterImpl {
+class NewsHomeInteracterImpl : NewsHomeInteracter {
+
+    override fun requestNewsUpdatesAPI(onFinishedListener: NewsHomeInteracter.OnFinishedListener) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

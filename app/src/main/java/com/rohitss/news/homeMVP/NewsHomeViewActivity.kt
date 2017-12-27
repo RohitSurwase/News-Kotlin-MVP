@@ -23,10 +23,31 @@ import com.rohitss.news.R
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsHomeViewActivity : AppCompatActivity() {
+class NewsHomeViewActivity : AppCompatActivity(), NewsHomeView {
+    val newsHomePresenter: NewsHomePresenterImpl = NewsHomePresenterImpl(this, NewsHomeInteracterImpl())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_home)
+    }
+
+    override fun showProgress() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideProgress() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun noNetworkError() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun requestSuccess() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun requestFailed() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

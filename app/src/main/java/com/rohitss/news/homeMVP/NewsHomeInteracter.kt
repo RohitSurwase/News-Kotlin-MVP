@@ -19,4 +19,12 @@ package com.rohitss.news.homeMVP
 /**
  * Created by RohitSS on 27-12-2017.
  */
-interface NewsHomeInteracter
+interface NewsHomeInteracter {
+    fun requestNewsUpdatesAPI(onFinishedListener: OnFinishedListener)
+
+    interface OnFinishedListener {
+        fun onNoNetworkError()
+        fun onRequestFetchError()
+        fun onRequestSuccess()
+    }
+}

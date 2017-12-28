@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news
+
+import android.app.Application
+import com.androidnetworking.AndroidNetworking
 
 /**
- * Created by RohitSS on 27-12-2017.
+ * Created by RohitSS on 28-12-2017.
  */
-interface NewsHomePresenter {
-    fun getNewsUpdates()
-    fun onDestroy()
+class MyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        AndroidNetworking.initialize(applicationContext)
+    }
 }

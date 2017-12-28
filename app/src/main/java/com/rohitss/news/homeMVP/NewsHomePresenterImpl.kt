@@ -16,13 +16,18 @@
 
 package com.rohitss.news.homeMVP
 
+import com.rohitss.news.homeMVP.dataModel.ArticlesItem
+
 /**
  * Created by RohitSS on 27-12-2017.
  */
 class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, val newsHomeInteracter: NewsHomeInteracterImpl) : NewsHomePresenter, NewsHomeInteracter.OnFinishedListener {
-    override fun setNewsUpdates(): List<String> {
-        newsHomeView.let { }
-        return emptyList<String>()
+
+    override fun getNewsUpdates() {
+        newsHomeView.let {
+            newsHomeView?.showProgress()
+            newsHomeInteracter.requestNewsUpdatesAPI(this)
+        }
     }
 
     override fun onDestroy() {
@@ -30,15 +35,17 @@ class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, val newsHom
     }
 
     override fun onNoNetworkError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        newsHomeView.let { onNoNetworkError() }
     }
 
     override fun onRequestFetchError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        newsHomeView.let { onRequestFetchError() }
     }
 
-    override fun onRequestSuccess() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onRequestSuccess(arrNewsUpdates: List<ArticlesItem?>?) {
+        newsHomeView.let {
+            newsHomeView?.hideProgress()
+            newsHomeView?.receivedNewsUpdates(arrNewsUpdates)
+        }
     }
-
 }

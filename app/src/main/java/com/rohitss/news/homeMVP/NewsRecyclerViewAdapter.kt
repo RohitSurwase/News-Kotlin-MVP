@@ -21,27 +21,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rohitss.news.R
+import com.rohitss.news.homeMVP.dataModel.ArticlesItem
 import kotlinx.android.synthetic.main.item_news_list_recycler.view.*
 
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsRecyclerViewAdapter(private val arrNewsList: List<String>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.MyViewHolder>() {
+class NewsRecyclerViewAdapter(private val arrNewsUpdates: List<ArticlesItem?>?) : RecyclerView.Adapter<NewsRecyclerViewAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_list_recycler, parent, false)
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(arrNewsList[position])
+        holder.bind(arrNewsUpdates!![position])
     }
 
-    override fun getItemCount() = arrNewsList.size
+    override fun getItemCount() = arrNewsUpdates!!.size
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(strNews: String) = with(itemView) {
-            textView_title.text = strNews
-            textView_subtitle.text = strNews
+        fun bind(articlesItem: ArticlesItem?) = with(itemView) {
+            textView_title.text = articlesItem?.title ?: ""
+            textView_subtitle.text = articlesItem?.description ?: ""
         }
+
     }
 }

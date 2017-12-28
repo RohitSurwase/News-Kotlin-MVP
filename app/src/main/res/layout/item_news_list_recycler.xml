@@ -2,16 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:padding="8dp">
 
     <TextView
         android:id="@+id/textView_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
     <TextView
         android:id="@+id/textView_subtitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"/>
 
 </LinearLayout>

@@ -16,6 +16,8 @@
 
 package com.rohitss.news.homeMVP
 
+import com.rohitss.news.homeMVP.dataModel.ArticlesItem
+
 /**
  * Created by RohitSS on 27-12-2017.
  */
@@ -25,6 +27,6 @@ interface NewsHomeInteracter {
     interface OnFinishedListener {
         fun onNoNetworkError()
         fun onRequestFetchError()
-        fun onRequestSuccess()
+        fun onRequestSuccess(arrNewsUpdates: List<ArticlesItem?>?)
     }
 }

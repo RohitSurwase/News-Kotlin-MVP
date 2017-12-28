@@ -23,6 +23,7 @@ interface NewsHomeView {
     fun showProgress()
     fun hideProgress()
     fun noNetworkError()
-    fun requestSuccess()
-    fun requestFailed()
+    fun requestNewsUpdates()
+    fun receivedNewsUpdates()
+    fun failedNewsUpdates()
 }

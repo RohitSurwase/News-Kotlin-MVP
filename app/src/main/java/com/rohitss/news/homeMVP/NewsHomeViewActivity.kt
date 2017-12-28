@@ -18,36 +18,48 @@ package com.rohitss.news.homeMVP
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.Toast
 import com.rohitss.news.R
+import kotlinx.android.synthetic.main.activity_news_home.*
 
 /**
  * Created by RohitSS on 27-12-2017.
  */
 class NewsHomeViewActivity : AppCompatActivity(), NewsHomeView {
-    val newsHomePresenter: NewsHomePresenterImpl = NewsHomePresenterImpl(this, NewsHomeInteracterImpl())
+
+    private val newsHomePresenter: NewsHomePresenter = NewsHomePresenterImpl(this, NewsHomeInteracterImpl())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_home)
+        progressBar.visibility = View.GONE
+        recyclerView.setHasFixedSize(true)
+        requestNewsUpdates()
+        fab.setOnClickListener { requestNewsUpdates() }
     }
 
     override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        progressBar.visibility = View.VISIBLE
     }
 
     override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        progressBar.visibility = View.GONE
     }
 
     override fun noNetworkError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this, "Network Not Available", Toast.LENGTH_SHORT).show()
     }
 
-    override fun requestSuccess() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun requestNewsUpdates() {
+        newsHomePresenter.setNewsUpdates()
     }
 
-    override fun requestFailed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun receivedNewsUpdates() {
+        recyclerView.adapter = NewsRecyclerViewAdapter(newsHomePresenter.setNewsUpdates())
+    }
+
+    override fun failedNewsUpdates() {
+        Toast.makeText(this, "Failed To Get News Updates", Toast.LENGTH_SHORT).show()
     }
 }

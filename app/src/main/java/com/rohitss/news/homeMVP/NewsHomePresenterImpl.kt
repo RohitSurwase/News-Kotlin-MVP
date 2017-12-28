@@ -19,13 +19,14 @@ package com.rohitss.news.homeMVP
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsHomePresenterImpl(val newsHomeView: NewsHomeView, val newsHomeInteracterImpl: NewsHomeInteracterImpl) : NewsHomePresenter, NewsHomeInteracter.OnFinishedListener {
-    override fun getNewsUpdates() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, val newsHomeInteracter: NewsHomeInteracterImpl) : NewsHomePresenter, NewsHomeInteracter.OnFinishedListener {
+    override fun setNewsUpdates(): List<String> {
+        newsHomeView.let { }
+        return emptyList<String>()
     }
 
     override fun onDestroy() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        newsHomeView = null
     }
 
     override fun onNoNetworkError() {

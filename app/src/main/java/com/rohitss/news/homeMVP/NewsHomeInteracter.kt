@@ -22,11 +22,10 @@ import com.rohitss.news.homeMVP.dataModel.ArticlesItem
  * Created by RohitSS on 27-12-2017.
  */
 interface NewsHomeInteracter {
-    fun requestNewsUpdatesAPI(onFinishedListener: OnFinishedListener)
+    fun requestNewsDataAPI(onFinishedListener: OnFinishedListener)
 
     interface OnFinishedListener {
-        fun onNoNetworkError()
-        fun onRequestFetchError()
-        fun onRequestSuccess(arrNewsUpdates: List<ArticlesItem?>?)
+        fun onResultSuccess(arrNewsUpdates: List<ArticlesItem?>?)
+        fun onResultFail()
     }
 }

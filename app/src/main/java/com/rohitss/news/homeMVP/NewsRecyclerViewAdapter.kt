@@ -37,12 +37,15 @@ class NewsRecyclerViewAdapter(private val arrNewsUpdates: List<ArticlesItem?>?) 
         holder.bind(arrNewsUpdates!![position])
     }
 
-    override fun getItemCount() = arrNewsUpdates!!.size
+    override fun getItemCount(): Int {
+        return arrNewsUpdates?.size ?: 0
+    }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(articlesItem: ArticlesItem?) = with(itemView) {
-            textView_title.text = articlesItem?.title ?: ""
-            textView_subtitle.text = articlesItem?.description ?: ""
+            textView_title.text = articlesItem?.title
+            textView_author.text = articlesItem?.author
+            textView_description.text = articlesItem?.description
         }
 
     }

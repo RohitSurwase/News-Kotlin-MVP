@@ -5,6 +5,8 @@
 *.apk
 *.ap_
 
+/gradle.properties
+
 # Files for the ART/Dalvik VM
 *.dex
 

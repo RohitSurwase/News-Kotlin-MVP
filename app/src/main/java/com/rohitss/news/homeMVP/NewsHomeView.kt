@@ -24,8 +24,6 @@ import com.rohitss.news.homeMVP.dataModel.ArticlesItem
 interface NewsHomeView {
     fun showProgress()
     fun hideProgress()
-    fun noNetworkError()
-    fun requestNewsUpdates()
-    fun receivedNewsUpdates(arrNewsUpdates: List<ArticlesItem?>?)
-    fun failedNewsUpdates()
+    fun setNewsData(arrNewsUpdates: List<ArticlesItem?>?)
+    fun getDataFailed()
 }

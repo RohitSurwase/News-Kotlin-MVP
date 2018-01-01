@@ -21,12 +21,13 @@ import com.rohitss.news.homeMVP.dataModel.ArticlesItem
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, val newsHomeInteracter: NewsHomeInteracterImpl) : NewsHomePresenter, NewsHomeInteracter.OnFinishedListener {
+class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, private val newsHomeInteracter: NewsHomeInteracterImpl)
+    : NewsHomePresenter, NewsHomeInteracter.OnFinishedListener {
 
-    override fun getNewsUpdates() {
+    override fun getNewsData() {
         newsHomeView.let {
             newsHomeView?.showProgress()
-            newsHomeInteracter.requestNewsUpdatesAPI(this)
+            newsHomeInteracter.requestNewsDataAPI(this)
         }
     }
 
@@ -34,18 +35,17 @@ class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, val newsHom
         newsHomeView = null
     }
 
-    override fun onNoNetworkError() {
-        newsHomeView.let { onNoNetworkError() }
-    }
-
-    override fun onRequestFetchError() {
-        newsHomeView.let { onRequestFetchError() }
-    }
-
-    override fun onRequestSuccess(arrNewsUpdates: List<ArticlesItem?>?) {
+    override fun onResultSuccess(arrNewsUpdates: List<ArticlesItem?>?) {
         newsHomeView.let {
             newsHomeView?.hideProgress()
-            newsHomeView?.receivedNewsUpdates(arrNewsUpdates)
+            newsHomeView?.setNewsData(arrNewsUpdates)
+        }
+    }
+
+    override fun onResultFail() {
+        newsHomeView.let {
+            newsHomeView?.hideProgress()
+            newsHomeView?.getDataFailed()
         }
     }
 }

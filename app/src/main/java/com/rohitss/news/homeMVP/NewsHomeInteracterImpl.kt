@@ -16,11 +16,11 @@
 
 package com.rohitss.news.homeMVP
 
-import android.util.Log
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.ParsedRequestListener
+import com.rohitss.news.BuildConfig
 import com.rohitss.news.homeMVP.dataModel.NewsResponse
 
 /**
@@ -28,22 +28,21 @@ import com.rohitss.news.homeMVP.dataModel.NewsResponse
  */
 class NewsHomeInteracterImpl : NewsHomeInteracter {
 
-    override fun requestNewsUpdatesAPI(onFinishedListener: NewsHomeInteracter.OnFinishedListener) {
-        AndroidNetworking.get("https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=4a8a9f47383e427a9759f7e8de01f96f")
-//                .addPathParameter("userId", "1")
+    override fun requestNewsDataAPI(onFinishedListener: NewsHomeInteracter.OnFinishedListener) {
+        AndroidNetworking.get("https://newsapi.org/v2/top-headlines?sources=bbc-news")
+                .addHeaders("X-Api-Key", BuildConfig.MY_NEWS_API_KEY)
                 .setTag(this)
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsObject(NewsResponse::class.java, object : ParsedRequestListener<NewsResponse> {
                     override fun onResponse(newsResponse: NewsResponse) {
-                        Log.d("Size of articles", newsResponse.articles?.size.toString())
-                        onFinishedListener.onRequestSuccess(newsResponse.articles)
                         // do anything with response
+                        onFinishedListener.onResultSuccess(newsResponse.articles)
                     }
 
                     override fun onError(anError: ANError) {
                         // handle error
-                        onFinishedListener.onRequestFetchError()
+                        onFinishedListener.onResultFail()
                     }
                 })
     }

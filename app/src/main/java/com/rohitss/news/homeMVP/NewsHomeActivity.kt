@@ -27,17 +27,20 @@ import kotlinx.android.synthetic.main.activity_news_home.*
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsHomeViewActivity : AppCompatActivity(), NewsHomeView {
+class NewsHomeActivity : AppCompatActivity(), NewsHomeView {
 
-    private val newsHomePresenter: NewsHomePresenter = NewsHomePresenterImpl(this, NewsHomeInteracterImpl())
+    private var newsHomePresenter: NewsHomePresenter = NewsHomePresenterImpl(this, NewsHomeInteracterImpl())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_home)
         progressBar.visibility = View.GONE
         recyclerView.setHasFixedSize(true)
-        requestNewsUpdates()
-        fab.setOnClickListener { requestNewsUpdates() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        newsHomePresenter.getNewsData()
     }
 
     override fun showProgress() {
@@ -48,19 +51,11 @@ class NewsHomeViewActivity : AppCompatActivity(), NewsHomeView {
         progressBar.visibility = View.GONE
     }
 
-    override fun noNetworkError() {
-        Toast.makeText(this, "Network Not Available", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun requestNewsUpdates() {
-        newsHomePresenter.getNewsUpdates()
-    }
-
-    override fun receivedNewsUpdates(arrNewsUpdates: List<ArticlesItem?>?) {
+    override fun setNewsData(arrNewsUpdates: List<ArticlesItem?>?) {
         recyclerView.adapter = NewsRecyclerViewAdapter(arrNewsUpdates)
     }
 
-    override fun failedNewsUpdates() {
+    override fun getDataFailed() {
         Toast.makeText(this, "Failed To Get News Updates", Toast.LENGTH_SHORT).show()
     }
 }

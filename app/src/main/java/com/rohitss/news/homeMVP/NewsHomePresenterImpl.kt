@@ -16,8 +16,6 @@
 
 package com.rohitss.news.homeMVP
 
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
-
 /**
  * Created by RohitSS on 27-12-2017.
  */
@@ -35,7 +33,7 @@ class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, private val
         newsHomeView = null
     }
 
-    override fun onResultSuccess(arrNewsUpdates: List<ArticlesItem?>?) {
+    override fun onResultSuccess(arrNewsUpdates: List<ArticlesItem>) {
         newsHomeView.let {
             newsHomeView?.hideProgress()
             newsHomeView?.setNewsData(arrNewsUpdates)

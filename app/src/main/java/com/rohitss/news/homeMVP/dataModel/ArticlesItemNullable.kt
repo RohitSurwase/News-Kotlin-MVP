@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news.homeMVP.dataModel
 
 import com.google.gson.annotations.SerializedName
 
-data class ArticlesItem(
+data class ArticlesItemNullable(
 
         @field:SerializedName("author")
-        var author: String,
+        val author: String? = null,
 
         @field:SerializedName("description")
-        var description: String,
+        val description: String? = null,
 
         @field:SerializedName("title")
-        var title: String
+        val title: String? = null
 )

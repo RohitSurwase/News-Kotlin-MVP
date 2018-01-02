@@ -16,14 +16,12 @@
 
 package com.rohitss.news.homeMVP
 
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
-
 /**
  * Created by RohitSS on 27-12-2017.
  */
 interface NewsHomeView {
     fun showProgress()
     fun hideProgress()
-    fun setNewsData(arrNewsUpdates: List<ArticlesItem?>?)
+    fun setNewsData(arrNewsUpdates: List<ArticlesItem>)
     fun getDataFailed()
 }

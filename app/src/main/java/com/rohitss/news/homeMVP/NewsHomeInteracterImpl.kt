@@ -16,12 +16,12 @@
 
 package com.rohitss.news.homeMVP
 
+import android.text.TextUtils
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.ParsedRequestListener
-import com.rohitss.news.BuildConfig
-import com.rohitss.news.homeMVP.dataModel.NewsResponse
+import com.rohitss.news.homeMVP.dataModel.NewsResponseNullable
 
 /**
  * Created by RohitSS on 27-12-2017.
@@ -30,14 +30,26 @@ class NewsHomeInteracterImpl : NewsHomeInteracter {
 
     override fun requestNewsDataAPI(onFinishedListener: NewsHomeInteracter.OnFinishedListener) {
         AndroidNetworking.get("https://newsapi.org/v2/top-headlines?sources=bbc-news")
-                .addHeaders("X-Api-Key", BuildConfig.MY_NEWS_API_KEY)
+                .addHeaders("X-Api-Key", "4a8a9f47383e427a9759f7e8de01f96f")
                 .setTag(this)
                 .setPriority(Priority.LOW)
                 .build()
-                .getAsObject(NewsResponse::class.java, object : ParsedRequestListener<NewsResponse> {
-                    override fun onResponse(newsResponse: NewsResponse) {
+                .getAsObject(NewsResponseNullable::class.java, object : ParsedRequestListener<NewsResponseNullable> {
+                    override fun onResponse(newsResponseNullable: NewsResponseNullable) {
                         // do anything with response
-                        onFinishedListener.onResultSuccess(newsResponse.articles)
+                        val articlesItemList: MutableList<ArticlesItem>? = mutableListOf()
+
+                        newsResponseNullable.articles!!
+                                .filterNotNull()
+                                .filter { !TextUtils.isEmpty(it.author) && !TextUtils.isEmpty(it.title) && !TextUtils.isEmpty(it.description) }
+                                .map { ArticlesItem(it.author!!, it.description!!, it.title!!) }
+                                .forEach { articlesItemList!!.add(it) }
+
+                        if (articlesItemList != null && !articlesItemList.isEmpty()) {
+                            onFinishedListener.onResultSuccess(articlesItemList)
+                        } else {
+                            onFinishedListener.onResultFail()
+                        }
                     }
 
                     override fun onError(anError: ANError) {

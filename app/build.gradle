@@ -20,9 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildTypes.each {
+    /*buildTypes.each {
         it.buildConfigField 'String', 'MY_NEWS_API_KEY', MY_NEWS_API_KEY
-    }
+    }*/
 }
 
 dependencies {

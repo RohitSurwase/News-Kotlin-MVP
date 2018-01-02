@@ -21,31 +21,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rohitss.news.R
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
 import kotlinx.android.synthetic.main.item_news_list_recycler.view.*
 
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsRecyclerViewAdapter(private val arrNewsUpdates: List<ArticlesItem?>?) : RecyclerView.Adapter<NewsRecyclerViewAdapter.MyViewHolder>() {
+class NewsRecyclerViewAdapter(private val arrNewsUpdates: List<ArticlesItem>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_list_recycler, parent, false)
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(arrNewsUpdates!![position])
+        holder.bind(arrNewsUpdates[position])
     }
 
     override fun getItemCount(): Int {
-        return arrNewsUpdates?.size ?: 0
+        return arrNewsUpdates.size
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(articlesItem: ArticlesItem?) = with(itemView) {
-            textView_title.text = articlesItem?.title
-            textView_author.text = articlesItem?.author
-            textView_description.text = articlesItem?.description
+        fun bind(articlesItem: ArticlesItem) = with(itemView) {
+            textView_title.text = articlesItem.title
+            textView_author.text = articlesItem.author
+            textView_description.text = articlesItem.description
         }
 
     }

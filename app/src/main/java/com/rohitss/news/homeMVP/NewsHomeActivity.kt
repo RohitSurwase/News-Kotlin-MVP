@@ -21,7 +21,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.rohitss.news.R
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
 import kotlinx.android.synthetic.main.activity_news_home.*
 
 /**
@@ -51,7 +50,7 @@ class NewsHomeActivity : AppCompatActivity(), NewsHomeView {
         progressBar.visibility = View.GONE
     }
 
-    override fun setNewsData(arrNewsUpdates: List<ArticlesItem?>?) {
+    override fun setNewsData(arrNewsUpdates: List<ArticlesItem>) {
         recyclerView.adapter = NewsRecyclerViewAdapter(arrNewsUpdates)
     }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news.homeMVP.dataModel
 
 import com.google.gson.annotations.SerializedName
 

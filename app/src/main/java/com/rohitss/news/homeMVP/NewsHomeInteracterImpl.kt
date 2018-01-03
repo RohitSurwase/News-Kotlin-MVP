@@ -21,6 +21,7 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.ParsedRequestListener
+import com.rohitss.news.homeMVP.dataModel.ArticlesItem
 import com.rohitss.news.homeMVP.dataModel.NewsResponseNullable
 
 /**
@@ -36,9 +37,14 @@ class NewsHomeInteracterImpl : NewsHomeInteracter {
                 .build()
                 .getAsObject(NewsResponseNullable::class.java, object : ParsedRequestListener<NewsResponseNullable> {
                     override fun onResponse(newsResponseNullable: NewsResponseNullable) {
-                        // do anything with response
                         val articlesItemList: MutableList<ArticlesItem>? = mutableListOf()
-
+                        /**
+                         * Note: we have two different data model for article- ArticlesItem & ArticlesItemNullable
+                         * We are getting server data in ArticlesItemNullable format and then
+                         * filtering it to remove any null or empty item.
+                         * This filtered data is then copied to the ArticlesItem item.
+                         * This way we are reducing nullability
+                         */
                         newsResponseNullable.articles!!
                                 .filterNotNull()
                                 .filter { !TextUtils.isEmpty(it.author) && !TextUtils.isEmpty(it.title) && !TextUtils.isEmpty(it.description) }
@@ -48,13 +54,13 @@ class NewsHomeInteracterImpl : NewsHomeInteracter {
                         if (articlesItemList != null && !articlesItemList.isEmpty()) {
                             onFinishedListener.onResultSuccess(articlesItemList)
                         } else {
-                            onFinishedListener.onResultFail()
+                            onFinishedListener.onResultFail("Nothing to show")
                         }
                     }
 
                     override fun onError(anError: ANError) {
                         // handle error
-                        onFinishedListener.onResultFail()
+                        onFinishedListener.onResultFail("Something went wrong")
                     }
                 })
     }

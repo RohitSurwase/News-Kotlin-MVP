@@ -16,6 +16,8 @@
 
 package com.rohitss.news.homeMVP
 
+import com.rohitss.news.homeMVP.dataModel.ArticlesItem
+
 /**
  * Created by RohitSS on 27-12-2017.
  */
@@ -40,10 +42,10 @@ class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, private val
         }
     }
 
-    override fun onResultFail() {
+    override fun onResultFail(strError: String) {
         newsHomeView.let {
             newsHomeView?.hideProgress()
-            newsHomeView?.getDataFailed()
+            newsHomeView?.getDataFailed(strError)
         }
     }
 }

@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.rohitss.news.R
+import com.rohitss.news.homeMVP.dataModel.ArticlesItem
 import kotlinx.android.synthetic.main.activity_news_home.*
 
 /**
@@ -54,7 +55,7 @@ class NewsHomeActivity : AppCompatActivity(), NewsHomeView {
         recyclerView.adapter = NewsRecyclerViewAdapter(arrNewsUpdates)
     }
 
-    override fun getDataFailed() {
-        Toast.makeText(this, "Failed To Get News Updates", Toast.LENGTH_SHORT).show()
+    override fun getDataFailed(strError: String) {
+        Toast.makeText(this, strError, Toast.LENGTH_SHORT).show()
     }
 }

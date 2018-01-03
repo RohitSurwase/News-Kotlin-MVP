@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rohitss.news.R
+import com.rohitss.news.homeMVP.dataModel.ArticlesItem
 import kotlinx.android.synthetic.main.item_news_list_recycler.view.*
 
 /**

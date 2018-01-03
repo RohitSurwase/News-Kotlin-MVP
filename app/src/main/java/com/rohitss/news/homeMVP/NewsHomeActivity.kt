@@ -51,11 +51,11 @@ class NewsHomeActivity : AppCompatActivity(), NewsHomeView {
         progressBar.visibility = View.GONE
     }
 
-    override fun setNewsData(arrNewsUpdates: List<ArticlesItem?>?) {
+    override fun setNewsData(arrNewsUpdates: List<ArticlesItem>) {
         recyclerView.adapter = NewsRecyclerViewAdapter(arrNewsUpdates)
     }
 
-    override fun getDataFailed() {
-        Toast.makeText(this, "Failed To Get News Updates", Toast.LENGTH_SHORT).show()
+    override fun getDataFailed(strError: String) {
+        Toast.makeText(this, strError, Toast.LENGTH_SHORT).show()
     }
 }

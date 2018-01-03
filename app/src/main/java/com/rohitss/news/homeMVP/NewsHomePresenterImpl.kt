@@ -35,17 +35,17 @@ class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, private val
         newsHomeView = null
     }
 
-    override fun onResultSuccess(arrNewsUpdates: List<ArticlesItem?>?) {
+    override fun onResultSuccess(arrNewsUpdates: List<ArticlesItem>) {
         newsHomeView.let {
             newsHomeView?.hideProgress()
             newsHomeView?.setNewsData(arrNewsUpdates)
         }
     }
 
-    override fun onResultFail() {
+    override fun onResultFail(strError: String) {
         newsHomeView.let {
             newsHomeView?.hideProgress()
-            newsHomeView?.getDataFailed()
+            newsHomeView?.getDataFailed(strError)
         }
     }
 }

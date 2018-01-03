@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news.homeMVP.dataModel
 
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
+import com.google.gson.annotations.SerializedName
 
+data class NewsResponseNullable(
 
-/**
- * Created by RohitSS on 27-12-2017.
- */
-interface NewsHomeInteracter {
-    fun requestNewsDataAPI(onFinishedListener: OnFinishedListener)
-
-    interface OnFinishedListener {
-        fun onResultSuccess(arrNewsUpdates: List<ArticlesItem>)
-        fun onResultFail(strError: String)
-    }
-}
+        @field:SerializedName("articles")
+        val articles: List<ArticlesItemNullable?>? = null
+)

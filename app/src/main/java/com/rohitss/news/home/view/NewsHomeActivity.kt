@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news.home.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Toast
 import com.rohitss.news.R
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
+import com.rohitss.news.home.model.ArticlesItem
+import com.rohitss.news.home.model.NewsHomeInteractor
+import com.rohitss.news.home.presenter.NewsHomePresenter
+import com.rohitss.news.showToast
 import kotlinx.android.synthetic.main.activity_news_home.*
 
 /**
  * Created by RohitSS on 27-12-2017.
  */
 class NewsHomeActivity : AppCompatActivity(), NewsHomeView {
-
-    private var newsHomePresenter: NewsHomePresenter = NewsHomePresenterImpl(this, NewsHomeInteracterImpl())
+    private lateinit var newsHomePresenter: NewsHomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_home)
+        newsHomePresenter = NewsHomePresenter(this, NewsHomeInteractor())
         progressBar.visibility = View.GONE
         recyclerView.setHasFixedSize(true)
     }
@@ -52,10 +54,15 @@ class NewsHomeActivity : AppCompatActivity(), NewsHomeView {
     }
 
     override fun setNewsData(arrNewsUpdates: List<ArticlesItem>) {
-        recyclerView.adapter = NewsRecyclerViewAdapter(arrNewsUpdates)
+        recyclerView.adapter = NewsListAdapter(arrNewsUpdates)
     }
 
     override fun getDataFailed(strError: String) {
-        Toast.makeText(this, strError, Toast.LENGTH_SHORT).show()
+        showToast(this, strError)
+    }
+
+    override fun onDestroy() {
+        newsHomePresenter.onDestroy()
+        super.onDestroy()
     }
 }

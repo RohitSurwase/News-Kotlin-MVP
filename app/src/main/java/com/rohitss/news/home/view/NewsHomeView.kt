@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news.home.view
+
+import com.rohitss.news.home.model.ArticlesItem
 
 /**
  * Created by RohitSS on 27-12-2017.
  */
-interface NewsHomePresenter {
-    fun getNewsData()
-    fun onDestroy()
+interface NewsHomeView {
+    fun showProgress()
+    fun hideProgress()
+    fun setNewsData(arrNewsUpdates: List<ArticlesItem>)
+    fun getDataFailed(strError: String)
 }

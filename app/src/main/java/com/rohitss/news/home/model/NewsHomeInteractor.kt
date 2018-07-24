@@ -14,25 +14,32 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news.home.model
 
 import android.text.TextUtils
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.ParsedRequestListener
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
-import com.rohitss.news.homeMVP.dataModel.NewsResponseNullable
+import com.rohitss.news.BuildConfig
 
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsHomeInteracterImpl : NewsHomeInteracter {
+class NewsHomeInteractor {
+    companion object {
+        private val TAG: String = NewsHomeInteractor::class.java.simpleName
+    }
 
-    override fun requestNewsDataAPI(onFinishedListener: NewsHomeInteracter.OnFinishedListener) {
+    interface OnFinishedListener {
+        fun onResultSuccess(arrNewsUpdates: List<ArticlesItem>)
+        fun onResultFail(strError: String)
+    }
+
+    fun requestNewsDataAPI(onFinishedListener: OnFinishedListener) {
         AndroidNetworking.get("https://newsapi.org/v2/top-headlines?sources=bbc-news")
-                .addHeaders("X-Api-Key", "4a8a9f47383e427a9759f7e8de01f96f")
-                .setTag(this)
+                .addHeaders("X-Api-Key", BuildConfig.NewsKotlinMvpApiKey)
+                .setTag(TAG)
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsObject(NewsResponseNullable::class.java, object : ParsedRequestListener<NewsResponseNullable> {

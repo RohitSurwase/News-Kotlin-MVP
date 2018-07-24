@@ -14,38 +14,34 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news.home.presenter
 
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
+import com.rohitss.news.home.model.ArticlesItem
+import com.rohitss.news.home.model.NewsHomeInteractor
+import com.rohitss.news.home.view.NewsHomeView
 
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsHomePresenterImpl(private var newsHomeView: NewsHomeView?, private val newsHomeInteracter: NewsHomeInteracterImpl)
-    : NewsHomePresenter, NewsHomeInteracter.OnFinishedListener {
+class NewsHomePresenter(private var newsHomeView: NewsHomeView?, private val newsHomeInteractor: NewsHomeInteractor)
+    : NewsHomeInteractor.OnFinishedListener {
 
-    override fun getNewsData() {
-        newsHomeView.let {
-            newsHomeView?.showProgress()
-            newsHomeInteracter.requestNewsDataAPI(this)
-        }
+    fun getNewsData() {
+        newsHomeView?.showProgress()
+        newsHomeInteractor.requestNewsDataAPI(this)
     }
 
-    override fun onDestroy() {
+    fun onDestroy() {
         newsHomeView = null
     }
 
     override fun onResultSuccess(arrNewsUpdates: List<ArticlesItem>) {
-        newsHomeView.let {
-            newsHomeView?.hideProgress()
-            newsHomeView?.setNewsData(arrNewsUpdates)
-        }
+        newsHomeView?.hideProgress()
+        newsHomeView?.setNewsData(arrNewsUpdates)
     }
 
     override fun onResultFail(strError: String) {
-        newsHomeView.let {
-            newsHomeView?.hideProgress()
-            newsHomeView?.getDataFailed(strError)
-        }
+        newsHomeView?.hideProgress()
+        newsHomeView?.getDataFailed(strError)
     }
 }

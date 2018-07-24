@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP.dataModel
+package com.rohitss.news.home.model
 
 import com.google.gson.annotations.SerializedName
 
 data class NewsResponseNullable(
-
         @field:SerializedName("articles")
         val articles: List<ArticlesItemNullable?>? = null
 )

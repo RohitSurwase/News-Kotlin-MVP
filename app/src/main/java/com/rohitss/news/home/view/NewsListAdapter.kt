@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news.home.view
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rohitss.news.R
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
+import com.rohitss.news.home.model.ArticlesItem
+import com.rohitss.news.inflate
 import kotlinx.android.synthetic.main.item_news_list_recycler.view.*
 
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsRecyclerViewAdapter(private val arrNewsUpdates: List<ArticlesItem>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.MyViewHolder>() {
+class NewsListAdapter(private val arrNewsUpdates: List<ArticlesItem>) : RecyclerView.Adapter<NewsListAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_list_recycler, parent, false)
-        return MyViewHolder(view)
+        return MyViewHolder(inflate(parent.context, R.layout.item_news_list_recycler, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -47,6 +46,5 @@ class NewsRecyclerViewAdapter(private val arrNewsUpdates: List<ArticlesItem>) : 
             textView_author.text = articlesItem.author
             textView_description.text = articlesItem.description
         }
-
     }
 }

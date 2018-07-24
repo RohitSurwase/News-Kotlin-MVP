@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package com.rohitss.news.homeMVP
+package com.rohitss.news.home.model
 
-import com.rohitss.news.homeMVP.dataModel.ArticlesItem
+import com.google.gson.annotations.SerializedName
 
-/**
- * Created by RohitSS on 27-12-2017.
- */
-interface NewsHomeView {
-    fun showProgress()
-    fun hideProgress()
-    fun setNewsData(arrNewsUpdates: List<ArticlesItem>)
-    fun getDataFailed(strError: String)
-}
+data class ArticlesItemNullable(
+        @field:SerializedName("author")
+        val author: String? = null,
+        @field:SerializedName("description")
+        val description: String? = null,
+        @field:SerializedName("title")
+        val title: String? = null
+)

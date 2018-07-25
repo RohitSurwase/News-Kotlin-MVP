@@ -44,4 +44,8 @@ class NewsHomePresenter(private var newsHomeView: NewsHomeView?, private val new
         newsHomeView?.hideProgress()
         newsHomeView?.getDataFailed(strError)
     }
+
+    fun onItemClick(adapterPosition: Int) {
+        newsHomeView?.onItemClick(adapterPosition)
+    }
 }

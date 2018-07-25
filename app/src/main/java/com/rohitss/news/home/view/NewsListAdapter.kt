@@ -27,13 +27,14 @@ import kotlinx.android.synthetic.main.item_news_list_recycler.view.*
 /**
  * Created by RohitSS on 27-12-2017.
  */
-class NewsListAdapter(private val arrNewsUpdates: List<ArticlesItem>) : RecyclerView.Adapter<NewsListAdapter.MyViewHolder>() {
+class NewsListAdapter(private val arrNewsUpdates: List<ArticlesItem>, private val listener: (Int) -> Unit) : RecyclerView.Adapter<NewsListAdapter.MyViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(inflate(parent.context, R.layout.item_news_list_recycler, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(arrNewsUpdates[position])
+        holder.bind(arrNewsUpdates[position], listener)
     }
 
     override fun getItemCount(): Int {
@@ -41,10 +42,11 @@ class NewsListAdapter(private val arrNewsUpdates: List<ArticlesItem>) : Recycler
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(articlesItem: ArticlesItem) = with(itemView) {
+        fun bind(articlesItem: ArticlesItem, listener: (Int) -> Unit) = with(itemView) {
             textView_title.text = articlesItem.title
             textView_author.text = articlesItem.author
             textView_description.text = articlesItem.description
+            itemView.setOnClickListener{listener(adapterPosition)}
         }
     }
 }

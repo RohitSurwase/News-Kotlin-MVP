@@ -26,4 +26,5 @@ interface NewsHomeView {
     fun hideProgress()
     fun setNewsData(arrNewsUpdates: List<ArticlesItem>)
     fun getDataFailed(strError: String)
+    fun onItemClick(adapterPosition: Int)
 }

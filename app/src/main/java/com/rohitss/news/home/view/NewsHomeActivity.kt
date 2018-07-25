@@ -54,11 +54,18 @@ class NewsHomeActivity : AppCompatActivity(), NewsHomeView {
     }
 
     override fun setNewsData(arrNewsUpdates: List<ArticlesItem>) {
-        recyclerView.adapter = NewsListAdapter(arrNewsUpdates)
+//        recyclerView.adapter = NewsListAdapter(arrNewsUpdates, newsHomePresenter::onItemClick)    // OR
+        recyclerView.adapter = NewsListAdapter(arrNewsUpdates) {
+            newsHomePresenter.onItemClick(it)
+        }
     }
 
     override fun getDataFailed(strError: String) {
         showToast(this, strError)
+    }
+
+    override fun onItemClick(adapterPosition: Int) {
+        showToast( this,"You clicked $adapterPosition")
     }
 
     override fun onDestroy() {
